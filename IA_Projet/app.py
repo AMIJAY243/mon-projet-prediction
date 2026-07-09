@@ -1,9 +1,13 @@
 import streamlit as st
 import joblib
 import pandas as pd
+import os  
 
-# Chargement du modèle champion
-model = joblib.load('best_model.pkl')
+# On définit le chemin du dossier courant
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Modifie la ligne 6 comme ceci :
+model = joblib.load(os.path.join(base_dir, 'best_model.pkl')
 
 st.title("⚡ Expert Energy Predictor")
 st.write("Prédiction de la production de Charbon (Zimbabwe)")
