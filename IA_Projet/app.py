@@ -56,7 +56,7 @@ st.markdown("""
 # --- CHARGEMENT ---
 @st.cache_resource
 def load_assets():
-    model = joblib.load(r'C:\IA_Projet\model.pkl')
+    model = joblib.load('model.pkl')
     scaler = joblib.load(r'C:\IA_Projet\scaler.pkl')
     df = pd.read_csv(r'C:\IA_Projet\energy_data.csv')
     return model, scaler, df
