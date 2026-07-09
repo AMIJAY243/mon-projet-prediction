@@ -7,7 +7,7 @@ import os
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Modifie la ligne 6 comme ceci :
-model = joblib.load(os.path.join(base_dir, 'best_model.pkl')
+model = joblib.load(os.path.join(base_dir, 'best_model.pkl'))
 
 st.title("⚡ Expert Energy Predictor")
 st.write("Prédiction de la production de Charbon (Zimbabwe)")
