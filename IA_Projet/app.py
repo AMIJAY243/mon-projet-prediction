@@ -1,8 +1,26 @@
+import seaborn as sns
 import streamlit as st
 import joblib
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+import os
+
+# 1. Configuration pour trouver les fichiers automatiquement
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 2. Fonction pour charger les assets (modèles et données)
+@st.cache_resource
+def load_assets():
+    # On utilise os.path.join pour trouver les fichiers dans le même dossier que app.py
+    model = joblib.load(os.path.join(base_dir, 'model.pkl'))
+    scaler = joblib.load(os.path.join(base_dir, 'scaler.pkl'))
+    df = pd.read_csv(os.path.join(base_dir, 'energy_data.csv'))
+    return model, scaler, df
+
+# 3. Chargement
+model, scaler, df = load_assets()
+
+# --- ICI TU COLLES LE RESTE DE TON CODE D'INTERFACE ---
+# Assure-toi que tu n'as plus aucun chemin commençant par "C:\" dans ton code
 # --- CONFIGURATION ---
 st.set_page_config(page_title="Expert Energy Predictor", page_icon="⚡", layout="wide")
 
@@ -53,13 +71,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# --- CHARGEMENT ---
-@st.cache_resource
-def load_assets():
-    model = joblib.load('model.pkl')
-    scaler = joblib.load(r'C:\IA_Projet\scaler.pkl')
-    df = pd.read_csv(r'C:\IA_Projet\energy_data.csv')
-    return model, scaler, df
+ 
 
 model, scaler, df = load_assets()
 df_zimbabwe = df[df['Entity'] == 'Zimbabwe'].dropna(subset=['Coal'])
